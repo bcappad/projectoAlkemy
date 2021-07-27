@@ -20,4 +20,4 @@ public class Role implements Serializable {
 
    @Temporal(TemporalType.TIMESTAMP)
    private LocalDateTime date;
-}
+ }
