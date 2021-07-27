@@ -28,4 +28,5 @@ public class TestimonialEntity {
     private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
+    
 }
