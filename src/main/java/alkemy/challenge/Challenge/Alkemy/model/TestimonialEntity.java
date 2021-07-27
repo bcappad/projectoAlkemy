@@ -16,7 +16,7 @@ import java.util.Date;
 @SQLDelete(sql = "UPDATE testimonials SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false")
 public class TestimonialEntity {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
     private String name;
@@ -25,7 +25,7 @@ public class TestimonialEntity {
     private Boolean deleted = false;
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creation;
+    private Date creationDate;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date update;
+    private Date updateDate;
 }
