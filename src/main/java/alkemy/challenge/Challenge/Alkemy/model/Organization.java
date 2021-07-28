@@ -1,4 +1,6 @@
 package alkemy.challenge.Challenge.Alkemy.model;
+import alkemy.challenge.Challenge.Alkemy.dto.views.OrganizationView;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.boot.SpringApplication;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -19,11 +21,15 @@ public class Organization
     @Id
     private Integer id;    
     @Column (nullable = false)
+    @JsonView({OrganizationView.Public.class})
     private String name;
-    @Column (nullable = false)    
+    @Column (nullable = false)
+    @JsonView({OrganizationView.Public.class})
     private String image;
+    @JsonView({OrganizationView.Public.class})
     private String address;
     @Column (nullable = false)
+    @JsonView({OrganizationView.Public.class})
     private int phone;
     @Column (nullable = false)    
     private String email;
