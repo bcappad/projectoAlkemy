@@ -17,4 +17,15 @@ public class UserRegistrationController {
     public String registerUser(@RequestBody UserModel registeringUser){
         return myUserDetailsService.registerUserInDB(registeringUser);
     }
+
+
+
+
+    //metodo creado para cumplir los requisitos, registerUser es de mi compañero Hector
+    @PostMapping(path = "auth/login")
+    public UserModel login(@RequestBody UserModel logginUser) throws Exception {
+        return myUserDetailsService.loginUser(logginUser);
+    }
+
+
 }
