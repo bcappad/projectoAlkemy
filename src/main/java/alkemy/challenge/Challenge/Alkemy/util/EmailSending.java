@@ -1,7 +1,9 @@
 package alkemy.challenge.Challenge.Alkemy.util;
 
 import java.io.IOException;
+import java.util.function.BiConsumer;
 
+import com.sendgrid.helpers.mail.objects.Personalization;
 import org.springframework.core.env.Environment;
 
 import com.sendgrid.Method;
@@ -42,15 +44,28 @@ public class EmailSending {
 		}
 	}
 
-	// Registration Email
+	// Registration Email - Json Adapted
 
 	public void registerEmail(Email to) throws IOException {
 		String apiKey = "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";
-		Email from = new Email("britosj30@gmail.com");
-		String subject = "Email Registration";
-		Content content = new Content("text/plain", "You've registered succesfully");
 
-		Mail mail = new Mail(from, subject, to, content);
+		Mail welcomingEmail = new Mail();
+
+		Email from = new Email("britosj30@gmail.com");
+		welcomingEmail.setFrom(new Email());
+
+		String subject = "Email Registration";
+		welcomingEmail.setSubject(subject);
+
+		welcomingEmail.setReplyTo(to);
+
+		welcomingEmail.setTemplateId("d-0556588f1dac43fb977c7999de714b6c");
+
+		Personalization per = new Personalization();
+		per.addTo(to);
+		per.addDynamicTemplateData("emailTitle", "Bienvenido!");
+		per.addDynamicTemplateData("emailBody", "Gracias por registrarte.");
+		welcomingEmail.addPersonalization(per);
 
 		SendGrid sg = new SendGrid(apiKey);
 		Request request = new Request();
@@ -58,7 +73,7 @@ public class EmailSending {
 		try {
 			request.setMethod(Method.POST);
 			request.setEndpoint("mail/send");
-			request.setBody(mail.build());
+			request.setBody(welcomingEmail.build());
 			Response response = sg.api(request);
 			System.out.println(response.getStatusCode());
 			System.out.println(response.getBody());
