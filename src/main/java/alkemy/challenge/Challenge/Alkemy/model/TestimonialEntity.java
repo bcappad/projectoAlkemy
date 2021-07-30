@@ -18,6 +18,7 @@ import java.util.Date;
 public class TestimonialEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
     private String name;
     private String image;
     private String content;
