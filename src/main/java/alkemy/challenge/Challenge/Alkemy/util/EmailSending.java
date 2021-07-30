@@ -52,7 +52,7 @@ public class EmailSending {
 		Mail welcomingEmail = new Mail();
 
 		Email from = new Email("britosj30@gmail.com");
-		welcomingEmail.setFrom(new Email());
+		welcomingEmail.setFrom(from);
 
 		String subject = "Email Registration";
 		welcomingEmail.setSubject(subject);
