@@ -50,6 +50,8 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
     //confirm pass y loginUser son los metodos creados para cumplir con el pedido, el resto de metodos son de mi compañero Hector
+    //paso a comentar los metodos por que no seran utilizados, ya que el metodo fue cambiado/eliminado
+    /*
     public void confirmPass(UserDetails user, String pass){
         if (bcryptEnconder.matches(pass,user.getPassword())){
         }else{
@@ -68,6 +70,6 @@ public class MyUserDetailsService implements UserDetailsService {
         }
 
 
-    }
+    }*/
 
 }
