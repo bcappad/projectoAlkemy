@@ -5,6 +5,7 @@ import alkemy.challenge.Challenge.Alkemy.model.UserModel;
 import alkemy.challenge.Challenge.Alkemy.repository.UserRepository;
 import alkemy.challenge.Challenge.Alkemy.config.BCryptConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,9 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private BCryptConfiguration bcryptEnconder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -41,4 +45,29 @@ public class MyUserDetailsService implements UserDetailsService {
         }
         return prompt;
     }
+
+
+
+
+    //confirm pass y loginUser son los metodos creados para cumplir con el pedido, el resto de metodos son de mi compañero Hector
+    public void confirmPass(UserDetails user, String pass){
+        if (bcryptEnconder.matches(pass,user.getPassword())){
+        }else{
+            throw new Error("Invalid Password");
+        }
+    }
+
+    public UserModel loginUser(UserModel loginUser) throws Exception{
+        try{
+            //loadUserByUsername es un metodo de mi compañero
+            UserDetails userFound = loadUserByUsername(loginUser.getEmail());
+            confirmPass(userFound, loginUser.getPassword());
+            return loginUser;
+        }catch (Exception e){
+            throw new Exception("{ok: false}");
+        }
+
+
+    }
+
 }

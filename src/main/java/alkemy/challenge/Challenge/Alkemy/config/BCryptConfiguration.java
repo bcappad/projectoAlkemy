@@ -9,4 +9,5 @@ public class BCryptConfiguration extends BCryptPasswordEncoder {
     public BCryptPasswordEncoder BCryptConfiguration(int strength) {
         return new BCryptPasswordEncoder(10);
     }
+
 }
