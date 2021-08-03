@@ -1,7 +1,9 @@
 package alkemy.challenge.Challenge.Alkemy.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -9,6 +11,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /*
+    Codigo que se deberia implementar pero, no quiero modificar el configure de mi compañero
+    *    @Autowired
+    private JwtAuthorizationFilter jwtAuthorizationFilter;
+
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests().antMatchers("/login").permitAll()
+                .anyRequest().authenticated()
+                .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+    * */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -50,5 +69,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/organization/public").hasAnyRole("USER")
                 .antMatchers(HttpMethod.POST,"/organization/public").hasAnyRole("ADMIN")
                 .anyRequest().authenticated();
+    }
+
+
+
+    /*
+    * es necesario hacer el authenticationManagerBean si quiero inyectarlo en el UserController
+    * */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
